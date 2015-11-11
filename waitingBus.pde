@@ -34,7 +34,9 @@ void setup() {
   size(640, 1000);
   background(100, 100, 100);
   imageMode(CENTER);
+  rectMode(CENTER);
   textAlign(CENTER);
+  noStroke();
 
   //load images
   BG            = loadImage("data/background.png");
@@ -52,7 +54,7 @@ void setup() {
 
   textFont(myFont);
   reset();
-  gameState = GAME_PLAYING;
+  gameState = GAME_START;
 }
 
 void draw() {
@@ -63,7 +65,10 @@ void draw() {
     fill(119, 91, 60);
     textSize(100);
     text("Welcome", width/2, height/2);
-
+    rect(width/2,height/2+120,200,100,5);
+    textSize(80);
+    fill(255);
+    text("PLAY",width/2,height/2+150);
     break;
 
   case GAME_INTRO:
@@ -106,16 +111,18 @@ void draw() {
   }
 }
 
+
+
 void mouseClicked() {
   switch(gameState) {
   case GAME_START:
-    if (mouseX > 310 && mouseX < 438 &&
-      mouseY > 357 && mouseY < 407) {
+    if (mouseX > width/2-100 && mouseX < width/2+100 &&
+        mouseY > height/2+70 && mouseY < height/2+170) {
       gameState = GAME_PLAYING;
       startTime=millis();
     }
     if (mouseX > 310 && mouseX < 438 &&
-      mouseY > 357 && mouseY < 407) {
+        mouseY > 357 && mouseY < 407) {
       gameState = GAME_INTRO;
     }
     break;
@@ -204,9 +211,11 @@ void checkMatch() {
     if (passenger.passID > 2) {
       score +=1;
       change=true;
+      startTime = millis();
     } else {
       lifeNum --;
       change=true;
+      startTime = millis();
     }
   }
   //button2
@@ -214,8 +223,12 @@ void checkMatch() {
       mouseY < 870          && mouseY < 930) {
     if (passenger.passID > 2) {
       score +=1;
+      change=true;
+      startTime = millis();
     } else {
       lifeNum --;
+      change=true;
+      startTime = millis();
     }
   }
   //button3
@@ -223,8 +236,10 @@ void checkMatch() {
       mouseY < 870          && mouseY < 930) {
     if (passenger.passID > 2) {
       score +=1;
+      change=true;
     } else {
       lifeNum --;
+      change=true;
     }
   }
   //button4
