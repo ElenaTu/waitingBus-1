@@ -206,8 +206,8 @@ void reset() {
 
 void checkMatch() {
   //button1
-  if (mouseX < width/5-90 && mouseX < width/5+60 && 
-      mouseY < 870        && mouseY < 930) {
+  if (mouseX > width/5-90 && mouseX < width/5+60 && 
+      mouseY > 870        && mouseY < 930) {
     if (passenger.passID > 2) {
       score +=1;
       change=true;
@@ -219,8 +219,8 @@ void checkMatch() {
     }
   }
   //button2
-  if (mouseX < width/5*2-90 && mouseX < width/5*2+60 && 
-      mouseY < 870          && mouseY < 930) {
+  if (mouseX > width/5*2-90 && mouseX < width/5*2+60 && 
+      mouseY > 870          && mouseY < 930) {
     if (passenger.passID > 2) {
       score +=1;
       change=true;
@@ -232,8 +232,8 @@ void checkMatch() {
     }
   }
   //button3
-  if (mouseX < width/5*3-90 && mouseX < width/5*3+60 && 
-      mouseY < 870          && mouseY < 930) {
+  if (mouseX > width/5*3-90 && mouseX < width/5*3+60 && 
+      mouseY > 870          && mouseY < 930) {
     if (passenger.passID > 2) {
       score +=1;
       change=true;
@@ -243,8 +243,8 @@ void checkMatch() {
     }
   }
   //button4
-  if (mouseX < width/5*4-90 && mouseX < width/5*4+60 && 
-      mouseY < 870          && mouseY < 930) {
+  if (mouseX > width/5*4-90 && mouseX < width/5*4+60 && 
+      mouseY > 870          && mouseY < 930) {
     if(passenger.passID > 2){
       score +=1;
     } else {
