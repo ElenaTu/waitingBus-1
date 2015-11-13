@@ -65,14 +65,17 @@ void draw() {
     fill(119, 91, 60);
     textSize(100);
     text("Welcome", width/2, height/2);
-    rect(width/2,height/2+120,200,100,5);
+    rect(width/2,height/2+120,250,100,5);
+    rect(width/2,height/2+240,250,100,5);
     textSize(80);
     fill(255);
-    text("PLAY",width/2,height/2+150);
+    text("PLAY", width/2,height/2+150);
+    text("INTRO",width/2,height/2+270);
     break;
 
   case GAME_INTRO:
-
+    background(100);
+    image(BG, width/2, 420);
     break;
 
   case GAME_PLAYING:
@@ -80,15 +83,11 @@ void draw() {
     image(BG, width/2, 420);
     image(busFront, width/4*3, 450, 225, 195);
 
-
-
-
     if (change) {
       passenger = new Passenger(int(random(0, 6)), int(random(0, 2)));
       bus = new Bus(int(random(0, 3)));
       change = false;
     }
-
 
     passenger.display();
     bus.display();
@@ -121,8 +120,8 @@ void mouseClicked() {
       gameState = GAME_PLAYING;
       startTime=millis();
     }
-    if (mouseX > 310 && mouseX < 438 &&
-        mouseY > 357 && mouseY < 407) {
+    if (mouseX > width/2-100  && mouseX < width/2+100 &&
+        mouseY > height/2+190 && mouseY < height/2+290) {
       gameState = GAME_INTRO;
     }
     break;
@@ -172,14 +171,14 @@ void showLife() {
 
 
 void showTime() {
-    int restTime = int(countDown/1000-(millis()-startTime)/1000);
-    fill(0, 115, 109);
-    textSize(20);
-    text("COUNTDOWN", width/3-20, 135);
-    textSize(80);
-    text(nf(restTime, 2), width/3-20, 220);
-    textSize(15);
-    text("second(s)", width/3+15, 230);
+  int restTime = int(countDown/1000-(millis()-startTime)/1000);
+  fill(0, 115, 109);
+  textSize(20);
+  text("COUNTDOWN", width/3-20, 135);
+  textSize(80);
+  text(nf(restTime, 2), width/3-20, 220);
+  textSize(15);
+  text("second(s)", width/3+15, 230);
   if( restTime <= 0 ){
     startTime = millis();
     change=true;
