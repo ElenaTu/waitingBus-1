@@ -78,6 +78,10 @@ void draw() {
     case GAME_INTRO:
       background(100);
       image(BG, width/2, 420);
+      rect(width/2,height/2+120,250,100,5);
+      textSize(40);
+      fill(255);
+      text("PLAY", width/2,height/2+150);
       break;
   
     case GAME_PLAYING:
@@ -111,6 +115,10 @@ void draw() {
       fill(119, 91, 60);
       textSize(80);
       text("SCORE:"+score, width/2, height/2);
+      rect(width/2,height/2+120,250,100,5);
+      textSize(40);
+      fill(255);
+      text("PLAY AGAIN", width/2,height/2+150);
       break;
   }
 }
@@ -132,8 +140,8 @@ void mouseClicked() {
     break;
 
   case GAME_INTRO:
-    if (mouseX > 310 && mouseX < 438 &&
-        mouseY > 357 && mouseY < 407) {
+    if (mouseX > width/2-100 && mouseX < width/2+100 &&
+        mouseY > height/2+70 && mouseY < height/2+170) {
       gameState = GAME_PLAYING;
       startTime=millis();
     }
@@ -144,8 +152,8 @@ void mouseClicked() {
     break;
 
   case GAME_END:
-    if (mouseX > 310 && mouseX < 438 &&
-        mouseY > 357 && mouseY < 407) {
+    if (mouseX > width/2-100 && mouseX < width/2+100 &&
+        mouseY > height/2+70 && mouseY < height/2+170) {
       reset();
       gameState = GAME_PLAYING;
       startTime=millis();
