@@ -41,25 +41,25 @@ class Word{
       case 0:
         fill(0);
         textSize(40);
-        text(time[word.timeID],width/2,height/2);
-        text("到"+location[word.locationID],width/2,height/2+40);
-        text(whatToDo[0],width/2,height/2+80);
+        text(time[word.timeID],width/2,height/2+20);
+        text("到"+location[word.locationID],width/2,height/2+60);
+        //text(whatToDo[0],width/2,height/2+80);
         break;
       
       case 1:
         fill(0);
         textSize(40);
-        text(time[word.timeID],width/2,height/2);
-        text("到"+location[word.locationID],width/2,height/2+40);
-        text(whatToDo[0],width/2,height/2+80);
+        text(time[word.timeID],width/2,height/2+20);
+        text("到"+location[word.locationID],width/2,height/2+60);
+       // text(whatToDo[0],width/2,height/2+80);
         break;
         
       case 2:
         fill(0);
         textSize(40);
-        text(time[word.timeID],width/2,height/2);
-        text("到"+location[word.locationID],width/2,height/2+40);
-        text(whatToDo[0],width/2,height/2+80);
+        text(time[word.timeID],width/2,height/2+20);
+        text("到"+location[word.locationID],width/2,height/2+60);
+       // text(whatToDo[0],width/2,height/2+80);
         break;
       
       case 3:

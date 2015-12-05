@@ -1,4 +1,4 @@
-PImage BG, busFront, busSide;
+PImage BG, busFront, busSide, info;
 PImage boy, girl, teacher, visitor, cat, dog;
 PImage waitingBtn, goAwayBtn, changeLineBtn, getOncBusBtn;
 
@@ -30,6 +30,7 @@ int currentTime, startTime;
 
 
 boolean change;
+boolean intro=false;
 
 void setup() {
   size(640, 1000);
@@ -46,13 +47,14 @@ void setup() {
   busSide       = loadImage("data/busSide.png");
   cat           = loadImage("data/4.png");
   waitingBtn    = loadImage("data/buttonA.png");
-  goAwayBtn     = loadImage("data/buttonB.png");
+  goAwayBtn     = loadImage("data/buttonC.png");
   changeLineBtn = loadImage("data/buttonB.png");
-  getOncBusBtn  = loadImage("data/buttonB.png");
+  getOncBusBtn  = loadImage("data/buttonD.png");
+  info          = loadImage("data/info.png");
 
   myFont = createFont("微軟正黑體", 100);
   textFont(myFont);
-  
+
   image(BG, width/2, 420);
 
   reset();
@@ -61,65 +63,70 @@ void setup() {
 
 void draw() {
   switch(gameState) {
-    case GAME_START:
-      background(100);
-      image(BG, width/2, 420);
-      fill(119, 91, 60);
-      textSize(100);
-      text("Welcome", width/2, height/2);
-      rect(width/2,height/2+120,250,100,5);
-      rect(width/2,height/2+240,250,100,5);
-      textSize(80);
-      fill(255);
-      text("PLAY", width/2,height/2+150);
-      text("INTRO",width/2,height/2+270);
-      break;
-  
-    case GAME_INTRO:
-      background(100);
-      image(BG, width/2, 420);
-      rect(width/2,height/2+120,250,100,5);
-      textSize(40);
-      fill(255);
-      text("PLAY", width/2,height/2+150);
-      break;
-  
-    case GAME_PLAYING:
-      background(100);
-      image(BG, width/2, 420);
-      image(busFront, width/4*3, 450, 225, 195);
-  
-      if (change) {
-        passenger = new Passenger(int(random(0, 6)), int(random(0, 2)));
-        bus = new Bus(int(random(0, 3)));
-        word =new Word(int(random(0, 11)),int(random(0, 10)));
-        change = false;
-        //println(passenger.passID+" "+passenger.lineStatus+" "+word.locationID);
-      }
-  
-      passenger.display();
-      bus.display();
-      word.display();
-      
-      showBtn();
-      showLife();
-      showTime();
-      showScore();
-      
-      checkEnd();
-      break;
-  
-    case GAME_END:
-      background(100);
-      image(BG, width/2, 420);
-      fill(119, 91, 60);
-      textSize(80);
-      text("SCORE:"+score, width/2, height/2);
-      rect(width/2,height/2+120,250,100,5);
-      textSize(40);
-      fill(255);
-      text("PLAY AGAIN", width/2,height/2+150);
-      break;
+  case GAME_START:
+    background(100);
+    image(BG, width/2, 420);
+    fill(119, 91, 60);
+    textSize(100);
+    text("Welcome", width/2, height/2);
+    rect(width/2, height/2+120, 250, 100, 5);
+    rect(width/2, height/2+240, 250, 100, 5);
+    textSize(80);
+    fill(255);
+    text("PLAY", width/2, height/2+150);
+    text("INTRO", width/2, height/2+270);
+    break;
+
+  case GAME_INTRO:
+    background(100);
+    image(info, width/2, 420);
+//    if(mouseClicked())
+//    {
+//    intro=true;
+//    fill(0);
+//    rect(width/2, height/2+120, 250, 100, 5);
+//    textSize(40);
+//    fill(255);
+//    text("PLAY", width/2, height/2+150);
+//    }
+    break;
+
+  case GAME_PLAYING:
+    background(100);
+    image(BG, width/2, 420);
+    image(busFront, width/4*3, 450, 225, 195);
+
+    if (change) {
+      passenger = new Passenger(int(random(0, 6)), int(random(0, 2)));
+      bus = new Bus(int(random(0, 3)));
+      word =new Word(int(random(0, 11)), int(random(0, 10)));
+      change = false;
+      //println(passenger.passID+" "+passenger.lineStatus+" "+word.locationID);
+    }
+
+    passenger.display();
+    bus.display();
+    word.display();
+
+    showBtn();
+    showLife();
+    showTime();
+    showScore();
+
+    checkEnd();
+    break;
+
+  case GAME_END:
+    background(100);
+    image(BG, width/2, 420);
+    fill(119, 91, 60);
+    textSize(80);
+    text("SCORE:"+score, width/2, height/2);
+    rect(width/2, height/2+120, 250, 100, 5);
+    textSize(40);
+    fill(255);
+    text("PLAY AGAIN", width/2, height/2+150);
+    break;
   }
 }
 
@@ -129,22 +136,20 @@ void mouseClicked() {
   switch(gameState) {
   case GAME_START:
     if (mouseX > width/2-100 && mouseX < width/2+100 &&
-        mouseY > height/2+70 && mouseY < height/2+170) {
+      mouseY > height/2+70 && mouseY < height/2+170) {
       gameState = GAME_PLAYING;
       startTime=millis();
     }
     if (mouseX > width/2-100  && mouseX < width/2+100 &&
-        mouseY > height/2+190 && mouseY < height/2+290) {
+      mouseY > height/2+190 && mouseY < height/2+290) {
       gameState = GAME_INTRO;
     }
     break;
 
   case GAME_INTRO:
-    if (mouseX > width/2-100 && mouseX < width/2+100 &&
-        mouseY > height/2+70 && mouseY < height/2+170) {
-      gameState = GAME_PLAYING;
-      startTime=millis();
-    }
+    gameState = GAME_PLAYING;
+    startTime=millis();
+    
     break;
 
   case GAME_PLAYING:
@@ -153,7 +158,7 @@ void mouseClicked() {
 
   case GAME_END:
     if (mouseX > width/2-100 && mouseX < width/2+100 &&
-        mouseY > height/2+70 && mouseY < height/2+170) {
+      mouseY > height/2+70 && mouseY < height/2+170) {
       reset();
       gameState = GAME_PLAYING;
       startTime=millis();
@@ -192,7 +197,7 @@ void showTime() {
   text(nf(restTime, 2), width/3-20, 220);
   textSize(15);
   text("second(s)", width/3+15, 230);
-  if( restTime <= 0 ){
+  if ( restTime <= 0 ) {
     startTime = millis();
     change=true;
     lifeNum --;
@@ -217,178 +222,174 @@ void reset() {
 
 
 void checkMatch() {
-  
+
   //button1 繼續等
-  if(mouseX > width/5-90 && mouseX < width/5+60 && 
-     mouseY > 870        && mouseY < 930) {
-     
+  if (mouseX > width/5-90 && mouseX < width/5+60 && 
+    mouseY > 870        && mouseY < 930) {
+
     //學生老師
-    if(passenger.passID <= 2) {
+    if (passenger.passID <= 2) {
       //來一路,坐二路三路
-      if(bus.busID == 0 &&
-         passenger.lineStatus == 0 &&
-         word.locationID >= 7 &&
-         word.locationID <= 10){
+      if (bus.busID == 0 &&
+        passenger.lineStatus == 0 &&
+        word.locationID >= 7 &&
+        word.locationID <= 10) {
         score += 1;
         change = true;
-        startTime = millis(); 
+        startTime = millis();
       }
       //來二路,坐一路
-      else if(bus.busID == 1 &&
-              passenger.lineStatus == 1 &&
-              word.locationID <= 6){
-             score += 1;
-             change = true;
-             startTime = millis(); 
+      else if (bus.busID == 1 &&
+        passenger.lineStatus == 1 &&
+        word.locationID <= 6) {
+        score += 1;
+        change = true;
+        startTime = millis();
       }
       //來二路,坐三路
-      else if(bus.busID == 1 &&
-              passenger.lineStatus == 0 &&
-              word.locationID >= 8){
-             score += 1;
-             change = true;
-             startTime = millis(); 
+      else if (bus.busID == 1 &&
+        passenger.lineStatus == 0 &&
+        word.locationID >= 8) {
+        score += 1;
+        change = true;
+        startTime = millis();
       }
       //來三路,坐一路
-      else if(bus.busID == 2 &&
-              passenger.lineStatus == 1 &&
-              word.locationID <= 6 ){
-             score += 1;
-             change = true;
-             startTime = millis(); 
+      else if (bus.busID == 2 &&
+        passenger.lineStatus == 1 &&
+        word.locationID <= 6 ) {
+        score += 1;
+        change = true;
+        startTime = millis();
       }
       //來三路,坐二路
-      else if(bus.busID == 2 &&
-              passenger.lineStatus == 0 &&
-              word.locationID == 7 ){
-             score += 1;
-             change = true;
-             startTime = millis(); 
+      else if (bus.busID == 2 &&
+        passenger.lineStatus == 0 &&
+        word.locationID == 7 ) {
+        score += 1;
+        change = true;
+        startTime = millis();
+      } else {
+        lifeNum --;
+        change = true;
+        startTime = millis();
       }
-      
-      else{
-       lifeNum --;
-       change = true;
-       startTime = millis();
-      }  
-   
     }
     //觀光客&動物們  
-    else if(passenger.passID >= 3) {
-       lifeNum --;
-       change = true;
-       startTime = millis();
+    else if (passenger.passID >= 3) {
+      lifeNum --;
+      change = true;
+      startTime = millis();
     }
   }
-  
+
   //button2 不能搭
   if (mouseX > width/5*2-90 && mouseX < width/5*2+60 && 
-      mouseY > 870          && mouseY < 930) {
+    mouseY > 870          && mouseY < 930) {
     //觀光客&動物們
     if (passenger.passID >= 3) {
       score += 1;
       change = true;
       startTime = millis();
-      
     } else {
       lifeNum --;
       change = true;
       startTime = millis();
     }
   }
-  
+
   //button3 換排
   if (mouseX > width/5*3-90 && mouseX < width/5*3+60 && 
-      mouseY > 870          && mouseY < 930){
-    
+    mouseY > 870          && mouseY < 930) {
+
     //學生老師
-    if(passenger.passID <= 2) {
+    if (passenger.passID <= 2) {
       //一路
-      if(passenger.lineStatus == 0 &&
-         word.locationID <= 6){
+      if (passenger.lineStatus == 0 &&
+        word.locationID <= 6) {
         score += 1;
         change = true;
-        startTime = millis(); 
+        startTime = millis();
       }
       //二路
-      else if(passenger.lineStatus == 1 &&
-              word.locationID == 7){
-             score += 1;
-             change = true;
-             startTime = millis(); 
+      else if (passenger.lineStatus == 1 &&
+        word.locationID == 7) {
+        score += 1;
+        change = true;
+        startTime = millis();
       }
       //三路
-      else if(passenger.lineStatus == 1 &&
-              word.locationID >= 8 &&
-              word.locationID <= 10 ){
-             score += 1;
-             change = true;
-             startTime = millis(); 
-      }
-      else{
-       lifeNum --;
-       change = true;
-       startTime = millis();
+      else if (passenger.lineStatus == 1 &&
+        word.locationID >= 8 &&
+        word.locationID <= 10 ) {
+        score += 1;
+        change = true;
+        startTime = millis();
+      } else {
+        lifeNum --;
+        change = true;
+        startTime = millis();
       }
     }
     //觀光客&動物們
-    else if(passenger.passID >= 3) {
-       lifeNum --;
-       change = true;
-       startTime = millis();
+    else if (passenger.passID >= 3) {
+      lifeNum --;
+      change = true;
+      startTime = millis();
     }
-   }
-      
+  }
 
-  
+
+
   //button4 上車
-  if(mouseX > width/5*4-90 && mouseX < width/5*4+60 && 
-     mouseY > 870          && mouseY < 930) {
-    
+  if (mouseX > width/5*4-90 && mouseX < width/5*4+60 && 
+    mouseY > 870          && mouseY < 930) {
+
     //學生老師
-    if(passenger.passID <= 2) {
+    if (passenger.passID <= 2) {
       //一路
-      if(bus.busID == 0 &&
-         passenger.lineStatus == 1 &&
-         word.locationID <= 6){
+      if (bus.busID == 0 &&
+        passenger.lineStatus == 1 &&
+        word.locationID <= 6) {
         score += 1;
         change = true;
-        startTime = millis(); 
+        startTime = millis();
       }
       //二路
-      else if(bus.busID == 1 &&
-              passenger.lineStatus == 0 &&
-              word.locationID == 7){
-             score += 1;
-             change = true;
-             startTime = millis(); 
+      else if (bus.busID == 1 &&
+        passenger.lineStatus == 0 &&
+        word.locationID == 7) {
+        score += 1;
+        change = true;
+        startTime = millis();
       }
       //三路
-      else if(bus.busID == 2 &&
-              passenger.lineStatus == 0 &&
-              word.locationID >= 8 &&
-              word.locationID <= 10 ){
-             score += 1;
-             change = true;
-             startTime = millis(); 
-      }else{
-       lifeNum --;
-       change = true;
-       startTime = millis();
+      else if (bus.busID == 2 &&
+        passenger.lineStatus == 0 &&
+        word.locationID >= 8 &&
+        word.locationID <= 10 ) {
+        score += 1;
+        change = true;
+        startTime = millis();
+      } else {
+        lifeNum --;
+        change = true;
+        startTime = millis();
       }
     }  
-    
+
     //觀光客&動物們  
-    else if(passenger.passID >= 3) {
-       lifeNum --;
-       change = true;
-       startTime = millis();
+    else if (passenger.passID >= 3) {
+      lifeNum --;
+      change = true;
+      startTime = millis();
     }
-     }
+  }
 }
 
-void checkEnd(){
-  if(lifeNum <= 0){
+void checkEnd() {
+  if (lifeNum <= 0) {
     gameState = GAME_END;
   }
 }
+
