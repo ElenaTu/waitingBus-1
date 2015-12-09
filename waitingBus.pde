@@ -305,7 +305,8 @@ void checkMatch() {
     //學生老師
     if (passenger.passID <= 2) {
       //一路
-      if (passenger.lineStatus == 0 &&
+      if (bus.busID == 0 &&
+        passenger.lineStatus == 0 &&
         word.locationID <= 6) {
         score += 1;
         change = true;
@@ -319,13 +320,15 @@ void checkMatch() {
         startTime = millis();
       }
       //三路
-      else if (passenger.lineStatus == 1 &&
+      else if ( bus.busID == 2 &&
+        passenger.lineStatus == 1 &&
         word.locationID >= 8 &&
         word.locationID <= 10 ) {
         score += 1;
         change = true;
         startTime = millis();
-      }else if (passenger.lineStatus == 1 &&
+      }else if ( bus.busID == 2 &&
+        passenger.lineStatus == 1 &&
         word.locationID <= 6 ) {
         score += 1;
         change = true;
