@@ -358,7 +358,7 @@ void checkMatch() {
       //二路
       else if (bus.busID == 1 &&
         passenger.lineStatus == 0 &&
-        word.locationID == 7) {
+        word.locationID <= 7) {
         score += 1;
         change = true;
         startTime = millis();
@@ -368,6 +368,12 @@ void checkMatch() {
         passenger.lineStatus == 0 &&
         word.locationID >= 8 &&
         word.locationID <= 10 ) {
+        score += 1;
+        change = true;
+        startTime = millis();
+      else if (bus.busID == 2 &&
+        passenger.lineStatus == 0 &&
+        word.locationID <= 6 ) {
         score += 1;
         change = true;
         startTime = millis();
