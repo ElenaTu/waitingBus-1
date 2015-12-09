@@ -320,8 +320,7 @@ void checkMatch() {
         startTime = millis();
       }
       //三路
-      else if ( bus.busID == 2 &&
-        passenger.lineStatus == 1 &&
+      else if (passenger.lineStatus == 1 &&
         word.locationID >= 8 &&
         word.locationID <= 10 ) {
         score += 1;
