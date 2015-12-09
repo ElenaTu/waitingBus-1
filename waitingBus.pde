@@ -371,6 +371,7 @@ void checkMatch() {
         score += 1;
         change = true;
         startTime = millis();
+        }
       else if (bus.busID == 2 &&
         passenger.lineStatus == 0 &&
         word.locationID <= 6 ) {
