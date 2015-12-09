@@ -55,7 +55,7 @@ void setup() {
   myFont = createFont("微軟正黑體", 100);
   textFont(myFont);
 
-  image(BG, width/2, 420);
+  image(BG, width/2, height/1000*420);
 
   reset();
   gameState = GAME_START;
@@ -65,21 +65,21 @@ void draw() {
   switch(gameState) {
   case GAME_START:
     background(100);
-    image(BG, width/2, 420);
+    image(BG, width/2, height/1000*420);
     fill(119, 91, 60);
     textSize(100);
     text("Welcome", width/2, height/2);
-    rect(width/2, height/2+120, 250, 100, 5);
-    rect(width/2, height/2+240, 250, 100, 5);
+    rect(width/2, height/1000*620, 250, 100, 5);
+    rect(width/2, height/1000*740, 250, 100, 5);
     textSize(80);
     fill(255);
-    text("PLAY", width/2, height/2+150);
-    text("INTRO", width/2, height/2+270);
+    text("PLAY", width/2, height/1000*650);
+    text("INTRO", width/2, height/1000*770);
     break;
 
   case GAME_INTRO:
     background(100);
-    image(info, width/2, 420);
+    image(info, width/2,height/1000*420);
 //    if(mouseClicked())
 //    {
 //    intro=true;
@@ -93,7 +93,7 @@ void draw() {
 
   case GAME_PLAYING:
     background(100);
-    image(BG, width/2, 420);
+    image(BG, width/2, height/1000*420);
     image(busFront, width/4*3, 450, 225, 195);
 
     if (change) {
@@ -118,14 +118,14 @@ void draw() {
 
   case GAME_END:
     background(100);
-    image(BG, width/2, 420);
+    image(BG, width/2, height/1000*420);
     fill(119, 91, 60);
     textSize(80);
     text("SCORE:"+score, width/2, height/2);
-    rect(width/2, height/2+120, 250, 100, 5);
+    rect(width/2, height/1000*620, 250, 100, 5);
     textSize(40);
     fill(255);
-    text("PLAY AGAIN", width/2, height/2+150);
+    text("PLAY AGAIN", width/2, height/1000*650);
     break;
   }
 }
@@ -225,7 +225,7 @@ void checkMatch() {
 
   //button1 繼續等
   if (mouseX > width/5-90 && mouseX < width/5+60 && 
-    mouseY > 870        && mouseY < 930) {
+    mouseY > height/1000*870        && mouseY < height/1000*930) {
 
     //學生老師
     if (passenger.passID <= 2) {
@@ -285,7 +285,7 @@ void checkMatch() {
 
   //button2 不能搭
   if (mouseX > width/5*2-90 && mouseX < width/5*2+60 && 
-    mouseY > 870          && mouseY < 930) {
+    mouseY > height/1000*870        && mouseY < height/1000*930) {
     //觀光客&動物們
     if (passenger.passID >= 3) {
       score += 1;
@@ -300,7 +300,7 @@ void checkMatch() {
 
   //button3 換排
   if (mouseX > width/5*3-90 && mouseX < width/5*3+60 && 
-    mouseY > 870          && mouseY < 930) {
+    mouseY > height/1000*870        && mouseY < height/1000*930) {
 
     //學生老師
     if (passenger.passID <= 2) {
@@ -343,7 +343,7 @@ void checkMatch() {
 
   //button4 上車
   if (mouseX > width/5*4-90 && mouseX < width/5*4+60 && 
-    mouseY > 870          && mouseY < 930) {
+    mouseY > height/1000*870        && mouseY < height/1000*930) {
 
     //學生老師
     if (passenger.passID <= 2) {
@@ -392,4 +392,3 @@ void checkEnd() {
     gameState = GAME_END;
   }
 }
-
