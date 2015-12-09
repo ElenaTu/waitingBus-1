@@ -325,7 +325,7 @@ void checkMatch() {
         score += 1;
         change = true;
         startTime = millis();
-      else if (passenger.lineStatus == 1 &&
+      }else if (passenger.lineStatus == 1 &&
         word.locationID <= 6 ) {
         score += 1;
         change = true;
